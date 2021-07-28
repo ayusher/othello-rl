@@ -1,2 +1,7 @@
 policy/
 value/
+policysav/
+valuesav/
+trainx.npy
+policyy.npy
+valuey.npy

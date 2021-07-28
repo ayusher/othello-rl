@@ -98,7 +98,7 @@ def play_game(shared_list, agents, lock, e):
     count = 0
     while True:
         count += 1
-        if count>16: temperature = 1e-8
+        if count>8: temperature = 1e-8
         agent = agents[turn-1]
         badd, policyadd = agent.search(board, temperature)
 

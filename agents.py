@@ -18,10 +18,14 @@ class self_play_agent:
         # determines who is likely to win
         self.value = tf.keras.Sequential([
             tf.keras.layers.Conv2D(512, (5, 5), input_shape=(8, 8, 1,), padding="same", activation="relu"),
-            tf.keras.layers.Conv2D(512, (3, 3), activation="relu", padding="same"),
+            tf.keras.layers.Conv2D(512, (3, 3), activation="relu"),
             tf.keras.layers.BatchNormalization(),
 
+            tf.keras.layers.Conv2D(512, (3, 3), activation="relu", padding="same"),
             tf.keras.layers.Conv2D(512, (3, 3), activation="relu"),
+            tf.keras.layers.BatchNormalization(),
+
+            tf.keras.layers.Conv2D(512, (3, 3), activation="relu", padding="same"),
             tf.keras.layers.Conv2D(512, (3, 3), activation="relu"),
             tf.keras.layers.BatchNormalization(),
 
@@ -35,7 +39,11 @@ class self_play_agent:
 
         # determines probability of making moves
         self.policy = tf.keras.Sequential([
-            tf.keras.layers.Conv2D(512, (3, 3), input_shape=(8, 8, 1,), activation="relu", padding="same"),
+            tf.keras.layers.Conv2D(512, (5, 5), input_shape=(8, 8, 1,), activation="relu", padding="same"),
+            tf.keras.layers.Conv2D(512, (3, 3), activation="relu", padding="same"),
+            tf.keras.layers.BatchNormalization(),
+
+            tf.keras.layers.Conv2D(512, (3, 3), activation="relu", padding="same"),
             tf.keras.layers.Conv2D(512, (3, 3), activation="relu", padding="same"),
             tf.keras.layers.BatchNormalization(),
 
@@ -69,7 +77,7 @@ class self_play_agent:
             print("rollouts {}".format(count))
         else:
             while count<25:
-                self.tree.do_deep_rollout(board, self.value, self.policy, count==0)
+                self.tree.do_deep_rollout(board, self.value, self.policy, True) #count==0
                 #self.tree.exploration_weight = max(.999999*self.tree.exploration_weight, 1)
                 count+=1
 

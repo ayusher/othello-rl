@@ -184,8 +184,8 @@ class MCTS:
         if t<=1e-8:
             #print("temp 0")
             action = max(list(range(len(arr))), key = lambda x: arr[x])
-            arr = np.array([0. for _ in range(64)])
-            arr[action] = 1
+            #arr = np.array([0. for _ in range(64)])
+            #arr[action] = 1
             return arr.reshape((8, 8, 1)), action
         #print("action", action)
         return arr.reshape((8, 8, 1)), action
